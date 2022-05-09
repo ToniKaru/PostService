@@ -5,11 +5,12 @@ import com.mongodb.lang.Nullable;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 
 
-
+@Document
 public class Post {
 
     @NonNull
