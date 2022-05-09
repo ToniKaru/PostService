@@ -20,7 +20,7 @@ public class Post {
     @NonNull
     @NotBlank
     @BsonProperty
-    private final long userId;
+    private final Long userId;
 
 
     @Nullable
@@ -29,13 +29,13 @@ public class Post {
 
 
     public Post(@NotBlank @BsonProperty String text,
-                @NotBlank @BsonProperty long userId) {
+                @NotBlank @BsonProperty Long userId) {
         this(text, userId, null);
     }
 
     @BsonCreator
     public Post(@NotBlank @BsonProperty String text,
-                @NotBlank @BsonProperty long userId,
+                @NotBlank @BsonProperty Long userId,
                 @BsonProperty ObjectId parentId) {
         this.text = text;
         this.userId = userId;
@@ -48,7 +48,7 @@ public class Post {
         return text;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
