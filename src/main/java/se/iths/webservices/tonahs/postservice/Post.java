@@ -5,13 +5,17 @@ import com.mongodb.lang.Nullable;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
-
-@Document
+@Document("posts")
 public class Post {
+
+    @Id
+    private String id;
 
     @NonNull
     @NotBlank
@@ -56,5 +60,18 @@ public class Post {
     @Nullable
     public ObjectId getParentId() {
         return parentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post)) return false;
+        Post post = (Post) o;
+        return text.equals(post.text) && userId.equals(post.userId) && Objects.equals(parentId, post.parentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(text, userId, parentId);
     }
 }
