@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/tonikaru/lab2malls
+  IMAGE_NAME: ghcr.io/tonikaru/post-service
   VERSION: ${{ github.event.release.tag_name }}
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker tag lab2malls:latest ${{ env.IMAGE_NAME }}:latest
+          docker tag post-service:latest ${{ env.IMAGE_NAME }}:latest
           docker push ${{ env.IMAGE_NAME }}:latest
-          docker tag lab2malls:latest ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          docker tag post-service:latest ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           docker push ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
