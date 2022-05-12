@@ -3,6 +3,8 @@ package se.iths.webservices.tonahs.postservice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.iths.webservices.tonahs.postservice.dto.PostDto;
+import se.iths.webservices.tonahs.postservice.dto.PostNewDto;
 import se.iths.webservices.tonahs.postservice.services.PostService;
 
 import javax.validation.Valid;
@@ -19,16 +21,16 @@ public class PostController {
 
 
     @PostMapping
-    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
-        Post savedPost = postService.save(post);
-        return new ResponseEntity<>(post, HttpStatus.CREATED);
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostNewDto postNewDto) {
+        PostDto savedPost = postService.save(postNewDto);
+        return new ResponseEntity<>(savedPost, HttpStatus.CREATED);
     }
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable String id) {
-        Post post = postService.findById(id);
-        return new ResponseEntity<>(post, HttpStatus.OK);
+    public ResponseEntity<PostDto> getPostById(@PathVariable String id) {
+        PostDto postDto = postService.findById(id);
+        return new ResponseEntity<>(postDto, HttpStatus.OK);
     }
 
 }

@@ -1,10 +1,11 @@
 package se.iths.webservices.tonahs.postservice.services;
 
-import se.iths.webservices.tonahs.postservice.Post;
+import se.iths.webservices.tonahs.postservice.dto.PostDto;
+import se.iths.webservices.tonahs.postservice.dto.PostNewDto;
 
 public interface PostService {
 
-    Post save(Post post);
+    PostDto save(PostNewDto postNewDto);
 
-    Post findById(String id);
+    PostDto findById(String id);
 }
