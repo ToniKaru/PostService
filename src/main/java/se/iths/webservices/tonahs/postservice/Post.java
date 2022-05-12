@@ -32,6 +32,10 @@ public class Post {
     private final String parentId;
 
 
+    public Post (){
+        this("default", "userId", null);
+    }
+
     public Post(@NotBlank @BsonProperty String text,
                 @NotBlank @BsonProperty String userId) {
         this(text, userId, null);
