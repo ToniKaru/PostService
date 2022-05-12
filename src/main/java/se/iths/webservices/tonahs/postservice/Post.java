@@ -19,18 +19,22 @@ public class Post {
     @NonNull
     @NotBlank
     @BsonProperty
-    private final String text;
+    private String text;
 
     @NonNull
     @NotBlank
     @BsonProperty
-    private final String userId;
+    private String userId;
 
 
     @Nullable
     @BsonProperty
-    private final String parentId;
+    private String parentId;
 
+
+    public Post (){
+        this("default", "userId", null);
+    }
 
     public Post(@NotBlank @BsonProperty String text,
                 @NotBlank @BsonProperty String userId) {
@@ -47,13 +51,33 @@ public class Post {
     }
 
 
+    public String getId() {
+        return id;
+    }
+
+    public Post setId(String id) {
+        this.id = id;
+        return this;
+    }
+
     @NonNull
     public String getText() {
         return text;
     }
 
+    public Post setText(@NonNull String text) {
+        this.text = text;
+        return this;
+    }
+
+    @NonNull
     public String getUserId() {
         return userId;
+    }
+
+    public Post setUserId(@NonNull String userId) {
+        this.userId = userId;
+        return this;
     }
 
     @Nullable
@@ -61,11 +85,15 @@ public class Post {
         return parentId;
     }
 
+    public Post setParentId(@Nullable String parentId) {
+        this.parentId = parentId;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Post)) return false;
-        Post post = (Post) o;
+        if (!(o instanceof Post post)) return false;
         return text.equals(post.text) && userId.equals(post.userId) && Objects.equals(parentId, post.parentId);
     }
 
