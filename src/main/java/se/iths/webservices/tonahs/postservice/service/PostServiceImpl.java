@@ -32,14 +32,9 @@ public class PostServiceImpl implements PostService {
 
         post = postRepository.save(post);
 
-        PostDto postDto = new PostDto();
-//        postDto.setId(post.getId());
-        postDto.setText(post.getText());
-        postDto.setUserId(post.getUserId());
-        postDto.setParentId(post.getParentId());
-//        postDto.setCreated(getCreated(post.getId()));
-        return postDto;
+        return getPostDto(post);
     }
+
 
 
     @Override
@@ -54,6 +49,16 @@ public class PostServiceImpl implements PostService {
         }
         Post post = postOptional.get();
 
+        return getPostDto(post);
+
+    }
+
+    private Date getCreated(String id) {
+        var mongoId = new ObjectId(id);
+        return mongoId.getDate();
+    }
+
+    private PostDto getPostDto(Post post) {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setText(post.getText());
@@ -61,12 +66,5 @@ public class PostServiceImpl implements PostService {
         postDto.setParentId(post.getParentId());
         postDto.setCreated(getCreated(post.getId()));
         return postDto;
-
-    }
-
-
-    private Date getCreated(String id) {
-        var mongoId = new ObjectId(id);
-        return mongoId.getDate();
     }
 }

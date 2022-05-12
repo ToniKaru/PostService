@@ -5,22 +5,22 @@ import javax.validation.constraints.NotNull;
 
 public class PostNewDto {
 
-//    @NotNull(message = "ID cannot be empty")
-//    private String id;
+    private String id;
     @NotNull(message = "Text cannot be empty")
     private String text;
+    @NotNull(message = "User ID cannot be empty")
     private String userId;
     private String parentId;
 
 
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public PostNewDto setId(String id) {
-//        this.id = id;
-//        return this;
-//    }
+    public String getId() {
+        return id;
+    }
+
+    public PostNewDto setId(String id) {
+        this.id = id;
+        return this;
+    }
 
     public String getText() {
         return text;

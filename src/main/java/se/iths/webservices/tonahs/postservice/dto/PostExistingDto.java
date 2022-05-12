@@ -9,6 +9,7 @@ public class PostExistingDto {
     private String id;
     @NotNull(message = "Text cannot be empty")
     private String text;
+    @NotNull(message = "User ID cannot be empty")
     private String userId;
     private String parentId;
     private Date created;
