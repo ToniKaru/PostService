@@ -3,34 +3,18 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Create and publish a Native image
+name: Create & Publish Docker image
 
 on:
   release:
-    types: [ published ]
-
-env:
+    types: [published]
+    
+env: 
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/tonikaru/post-service
-  VERSION: ${{ github.event.release.tag_name }}
-
+  IMAGE_NAME: ${{ github.repository }}
+  
 jobs:
-  compile-and-test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-  build-and-publish-executable-and-image:
-    needs: [ compile-and-test ]
+  build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,28 +22,25 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-          
-      - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-  
-      - name: Build a docker image
-        run: mvn package -Dpackaging=docker-native -Pgraalvm
 
-      - name: Push Docker image
-        run: |
-          docker tag post-service:latest ${{ env.IMAGE_NAME }}:latest
-          docker push ${{ env.IMAGE_NAME }}:latest
-          docker tag post-service:latest ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          docker push ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
