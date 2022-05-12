@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import se.iths.webservices.tonahs.postservice.Post;
 import se.iths.webservices.tonahs.postservice.dto.PostDto;
 import se.iths.webservices.tonahs.postservice.dto.PostNewDto;
+import se.iths.webservices.tonahs.postservice.exception.PostNotFoundException;
 import se.iths.webservices.tonahs.postservice.repository.PostRepository;
 
 import java.util.Date;
@@ -49,7 +50,7 @@ public class PostServiceImpl implements PostService {
 
         Optional<Post> postOptional = postRepository.findById(id);
         if (postOptional.isEmpty()){
-            throw new RuntimeException(id + "not found");
+            throw new PostNotFoundException(id);
         }
         Post post = postOptional.get();
 
