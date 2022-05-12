@@ -1,4 +1,4 @@
-package se.iths.webservices.tonahs.postservice.services;
+package se.iths.webservices.tonahs.postservice.service;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

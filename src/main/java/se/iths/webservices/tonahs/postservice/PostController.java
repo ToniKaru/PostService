@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.webservices.tonahs.postservice.dto.PostDto;
 import se.iths.webservices.tonahs.postservice.dto.PostNewDto;
-import se.iths.webservices.tonahs.postservice.services.PostService;
+import se.iths.webservices.tonahs.postservice.service.PostService;
 
 import javax.validation.Valid;
 
