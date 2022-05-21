@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class PostServiceApplication  {
+public static String EXCHANGE_NAME = "post-exchange";
+public static String ROUTING_KEY = "post.new";
 
 	public static void main(String[] args) {
 		SpringApplication.run(PostServiceApplication.class, args);
