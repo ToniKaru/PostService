@@ -2,8 +2,9 @@ package se.iths.webservices.tonahs.postservice.dto;
 
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class PostNewDto {
+public class PostNewDto implements Serializable {
 
     private String id;
     @NotNull(message = "Text cannot be empty")
