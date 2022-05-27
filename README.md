@@ -23,7 +23,7 @@ It will handle the services required for each user post.
 `
 5. Start PostService
 
-   `docker run -d --name post-service -p 8080:8080 --network mongo-network -e  CONSUL_HOST=consul -e MONGODB_HOST=mongodb_test ghcr.io/tonikaru/postservice:latest`
+   `docker run -d --name post-service -p 8080:8080 --network mongo-network -e USERNAME=mongoadmin -e PASSWORD=secret -e MONGODB_HOST=mongodb_test -e CONSUL_HOST=consul ghcr.io/tonikaru/postservice:latest`
 
 ## Endpoints
 
