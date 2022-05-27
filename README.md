@@ -5,6 +5,10 @@ This is a microservice for a Twitter type application.
 It will handle the services required for each user post.  
 
 #  How to run the service
+0. Download the image
+
+   `docker pull ghcr.io/tonikaru/postservice:latest`
+
 1. Create the network
 
    `docker create network mongo-network`
